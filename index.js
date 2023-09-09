@@ -2,9 +2,13 @@ const fs = require('fs')
 const http = require("http");
 const url = require("url");
 
+const slugify = require('slugify')
+
 const dataObj = JSON.parse(
   fs.readFileSync(`${__dirname}/dev-data/data.json`, "utf-8")
 );
+const slugs = dataObj.map((p) => slugify(p.productName, { lower: true }));
+console.log(slugs);
 const tempOverview = fs.readFileSync(
   `${__dirname}/templates/template-overview.html`,
   "utf-8"
